@@ -1,6 +1,6 @@
 [user]
-	name = <your_name>
-	email = <your_email>
+	name = dolelongan
+	email = dolelongan@gmail.com
 [core]
 	autocrlf = input
 	excludesfile = /Users/np/.gitignore_global
@@ -55,7 +55,6 @@
     st = status -s
     cl = clone
     ci = commit
-    co = checkout
     br = branch
     sw = switch
     swb = checkout -
@@ -66,6 +65,7 @@
     ca = commit --amend
     amend = commit --amend
     caa = commit -a --amend -C HEAD
+    p = push
     puf = push --force-with-lease
 	# }}}
 # diff {{{
@@ -95,7 +95,10 @@
     hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
     # branch delete here: Deletes all local branches that have already been merged to the branch that you're currently on
     brdhere = !sh -c \"git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d\"
-
+	
+    # help
+    h = "!sh -c \"git --help && echo; git config -l | grep -E \\\"alias\\\\..*\\\" | sed -E \\\"s/^alias\\\\.([^=]+)=(.*)$/\\\\n\\\\1:\\t\\\\2/\\\"\""
+    
 # }}}
 
 [rerere]
