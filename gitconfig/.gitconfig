@@ -61,10 +61,9 @@
     r = reset
     	# }}}
 # commit {{{
-    ada = add .
-    ca = commit --amend
+    aa = add .
     amend = commit --amend
-    caa = commit -a --amend -C HEAD
+    amend-HEAD = commit -a --amend -C HEAD
     p = push
     puf = push --force-with-lease
 	# }}}
@@ -86,19 +85,28 @@
 # various useful {{{
     # list remotes
     rem= "!git config -l | grep remote.*url | tail -n +2"
+
     # list all aliases
     la = "!git config -l | grep alias | cut -c 7-"
+
     # worktree list
     wl = worktree list
+
     # history: This is pretty much the only way I look at my log. 
     # Aside from providing one-line logs, it also shows the branching in/out
     hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+
     # branch delete here: Deletes all local branches that have already been merged to the branch that you're currently on
     brdhere = !sh -c \"git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d\"
+
+    # list all branches remotely and locally
+    labr = branch -a
+
+    # sync branch
+    sync-up = "!sh -c 'current_branch=\"$(git symbolic-ref --short HEAD)\"; git branch -u origin/${current_branch} ${current_branch}; git remote set-head origin -a'"
 	
     # help
-    h = "!sh -c \"git --help && echo; git config -l | grep -E \\\"alias\\\\..*\\\" | sed -E \\\"s/^alias\\\\.([^=]+)=(.*)$/\\\\n\\\\1:\\t\\\\2/\\\"\""
-    
+    list-alias = "!sh -c \"git --help && echo; git config -l | grep -E \\\"alias\\\\..*\\\" | sed -E \\\"s/^alias\\\\.([^=]+)=(.*)$/\\\\n\\\\1:\\t\\\\2/\\\"\""    
 # }}}
 
 [rerere]
