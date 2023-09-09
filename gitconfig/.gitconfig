@@ -98,7 +98,8 @@
 
     # branch delete here: Deletes all local branches that have already been merged to the branch that you're currently on
     brdhere = !sh -c \"git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d\"
-
+    sweep = ! "git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
+    
     # list all branches remotely and locally
     labr = branch -a
 
