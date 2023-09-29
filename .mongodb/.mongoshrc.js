@@ -1,3 +1,5 @@
+// Customize the display information on the query input
+
 async function showDatabasesOnStartup() {
     const adminDb = db.getSiblingDB('admin');
     const { databases } = await adminDb.runCommand({ listDatabases: 1 });

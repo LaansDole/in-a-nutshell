@@ -1,4 +1,4 @@
-# Welcome to my .(dot) journey
+# Welcome to my in a nut.sh journey
 
 To list only hidden files on a Mac, you can use the `ls` command with the `-ld` option followed by `.*`. Here's the command:
 

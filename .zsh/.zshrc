@@ -120,11 +120,6 @@ alias cd..="cd .."
 alias l="ls -al"
 alias lp="ls -p"
 alias h=history
-alias dev="cd /Volumes/Development\ HD/"
-alias samples="cd /Volumes/Development\ HD/Samples"
-alias sdks="cd /Volumes/Development\ HD/SDKs"
-alias uml="cd /Volumes/Development\ HD/UML"
-alias specs="cd /Volumes/Development\ HD/Specs"
 alias cp='cp -iv'                           # Preferred 'cp' implementation
 alias mv='mv -iv'                           # Preferred 'mv' implementation
 alias mkdir='mkdir -pv'                     # Preferred 'mkdir' implementation
@@ -138,7 +133,6 @@ alias .3='cd ../../../'                     # Go back 3 directory levels
 alias .4='cd ../../../../'                  # Go back 4 directory levels
 alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
-alias edit='subl'                           # edit:         Opens any file in sublime editor
 alias f='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
 alias ~="cd ~"                              # ~:            Go Home
 alias c='clear'                             # c:            Clear terminal display
@@ -151,40 +145,25 @@ ql () { qlmanage -p "$*" >& /dev/null; }    # ql:           Opens any file in Ma
 alias DT='tee ~/Desktop/terminalOut.txt'    # DT:           Pipe content to file on MacOS Desktop
 alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
 alias qfind="find . -name "                 # qfind:    Quickly search for file
+alias help-shell="awk '/^### MY ALIASES ###$/{flag=1}/^#$/{flag=0}flag' ~/.zshrc"          # help-shell: List all aliases in bash
+alias help-git="awk '/^### MY GIT ALIASES ###$/{flag=1}/^#$/{flag=0}flag' ~/.gitconfig"    # help-git: List all aliases in git 
+alias reset='source ~/.zshrc'               # reset: reset .zshrc
 
-#   memHogsTop, memHogsPs:  Find memory hogs
-#   -----------------------------------------------------
-    alias memHogsTop='top -l 1 -o rsize | head -20'
-    alias memHogsPs='ps wwaxm -o pid,stat,vsize,rss,time,command | head -10'
+######################
+### SYSTEM ALIASES ###
+######################
 
-#   cpuHogs:  Find CPU hogs
-#   -----------------------------------------------------
-    alias cpu_hogs='ps wwaxr -o pid,stat,%cpu,time,command | head -10'
+alias memHogsTop='top -l 1 -o rsize | head -20'                          # memHogsTop, memHogsPs: Find memory hogs
+alias memHogsPs='ps wwaxm -o pid,stat,vsize,rss,time,command | head -10'
+alias cpu_hogs='ps wwaxr -o pid,stat,%cpu,time,command | head -10'       # cpu_hogs: Find CPU hogs
+alias topForever='top -l 9999999 -s 10 -o cpu'                           # topForever: Continual 'top' listing (every 10 seconds)
+alias ttop="top -R -F -s 10 -o rsize"                                    # ttop:  Recommended 'top' invocation to minimize resources
+alias mountReadWrite='/sbin/mount -uw /'                                 # mountReadWrite:   For use when booted into single-user
+alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"          # cleanupDS: Recursively delete .DS_Store file
+alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'              # finderShowHidden: Show hidden files in Finder
+alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'             # finderHideHidden: Hide hidden files in Finder
+alias cleanupLS="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 
-#   topForever:  Continual 'top' listing (every 10 seconds)
-#   -----------------------------------------------------
-    alias topForever='top -l 9999999 -s 10 -o cpu'
-
-#   ttop:  Recommended 'top' invocation to minimize resources
-#   ------------------------------------------------------------
-#       Taken from this macosxhints article
-#       http://www.macosxhints.com/article.php?story=20060816123853639
-#   ------------------------------------------------------------
-    alias ttop="top -R -F -s 10 -o rsize"
-
-    alias mountReadWrite='/sbin/mount -uw /'    # mountReadWrite:   For use when booted into single-user
-
-#   cleanupDS:  Recursively delete .DS_Store files
-#   -------------------------------------------------------------------
-    alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"
-
-#   finderShowHidden:   Show hidden files in Finder
-#   finderHideHidden:   Hide hidden files in Finder
-#   -------------------------------------------------------------------
-    alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'
-    alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'
-
-#   cleanupLS:  Clean up LaunchServices to remove duplicates in the "Open With" menu
-#   -----------------------------------------------------------------------------------
-    alias cleanupLS="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
-
+###################
+### END ALIASES ###
+###################
