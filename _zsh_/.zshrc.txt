@@ -219,12 +219,11 @@ helpme() {
     
     echo "What do you need help with?"
     echo "1. shell"
-    echo "2. git"
-    echo "3. change_name"
-    echo "4. find_dir"
-    echo "5. move_file"
-    echo "6. wtf"
-    echo "7. shellcheck"
+    echo "2. git"	
+    echo "3. touchf"
+    echo "4. unfunction"
+    echo "5. movfd"
+    echo "6. shellcheck"
 
     echo -e "\nEnter your choice: "
     read choice
@@ -239,22 +238,18 @@ helpme() {
 	    break
             ;;
         3)
-            echo ">>> change_name <old_name> <new_name>: Changes the name of a file or directory from <old_name> to <new_name>."
+            echo ">>> touchf <file_name>: Advanced touch command, let you create a file and modify it immediately."
             break
 	    ;;
         4)
-            echo ">>> find_dir <dir_name>: Finds a directory with the name <dir_name>. If it doesn't exist, it asks if you want to create it."
+            echo ">>> unfunction <function1> <function2> <function3> ... : Unset multiple functions at the same time, similar to unalias command but with function"
             break
 	    ;;
         5)
-            echo ">>> move_file <file_path> <dir_path>: Moves a file from <file_path> to directory at <dir_path>."
+            echo ">>> movfd <file_path> <dir_path>: Moves a file from <file_path> to directory at <dir_path>."
             break
 	    ;;
         6)
-            echo ">>> wtf <command>: Opens a web page explaining the given command."
-            break
-	    ;;
-        7)
             echo ">>> shellcheck <file1> <file2> ...: Checks shell scripts for common errors and potential issues."
             break
 	    ;;
