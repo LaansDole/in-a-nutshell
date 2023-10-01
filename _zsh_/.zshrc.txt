@@ -155,50 +155,32 @@ alias seesh='cat ~/.zshrc'		    # seesh: see .zshrc
 ### FUNCTION ALIASES ###
 ########################
 
-cd() { builtin cd "$@"; ll; }               # Always list directory contents upon 'cd'
+cd() { builtin cd "$@"; ll; }		# Always list directory contents upon 'cd'
 
-#### Change name of a file ####
-change_name() {
-	if [ -e "$1" ]
-	then
-		rsync -r "$1" "$2"
-		rm -r "$1"
+#### Make a file and immediately modify it ####
+touchf() {
+ 	if [[ -n "$1" ]]
+	then 
+		touch "$1";
+		vim "$1";
+		if [ -z "$1" ]
+        	then 
+			chmod 700 "$1";
+		fi 
 	else
-		echo "$1 file or directory does not exist"
-	fi
+		echo -e "Please specify a file"
+	fi 
 }
 
-#### Find a directory ####
-find_dir() {
-	echo -e "Finding the directory..."
-	path=$(sudo find / -type d -name "$1" 2>/dev/null | head -n 1)
-	if [[ -n $path ]];
-	then
-		cd "$HOME" || exit
-		cd "$path" || exit
-		echo "List all contents from $path: "
-		output=$(ls "$path")
-		if [ -z "$output" ];
-		then
-			echo -e "Directory is empty!"
-		else
-			ls -la "$path"
-		fi		
-	else
-		echo "Directory does not exist. Do you want to make this?(Y/N) "
-		read -r yes
-		if [ "$yes" == 'Y' ]
-		then
-			echo "Making directory $1"
-			mkdir -p "$1"
-		else
-			echo "Exit"
-		fi
-	fi
+#### Unfunction multiple function ####
+unfunction() {
+  for func in "$@"; do
+    unset -f "$func"
+  done
 }
 
 #### Move a file to directory ####
-move_file() {
+movfd() {
 	if [ -e "$1" ]
 	then
 		if [ -d "$2" ]
@@ -211,20 +193,6 @@ move_file() {
 		fi
 	else
 		echo "$1 file or $2 directory does not exist at $(pwd)"
-	fi
-}
-
-#### WTF is this ####
-wtf() {
-	set -euo pipefail
-
-	args="$@"
-	query=$(printf %s "$args" | jq -sRr @uri)
-	url="https://explainshell.com/explain?cmd=$query"
-
-	if command -v xdg-open &> /dev/null
-	then
-	    xdg-open "$url"
 	fi
 }
 
@@ -295,13 +263,7 @@ helpme() {
             ;;
     esac
   done
-}
 
-#### Create a file and modify it immediately ####
-touch() {
-    touch "$1"
-    chmod 700 "$1"
-    vim "$1"
 }
 
 ######################

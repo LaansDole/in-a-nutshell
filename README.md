@@ -1,6 +1,14 @@
 # Welcome to my in a nutsh journey
 ## Getting Started
 You just need to remove the `.txt` on all files move them to the root (`~`) of your terminal
+
+## Pre-requisites
+- `shellcheck-stable` directory is installed, if not, see the References below 
+- `.zshrc` file and `shellcheck-stable` directory must be in the same directory
+- You must allow `shellcheck-stable` to be run on MacOS, otherwise the system will prevent you from running it
+- For macOS, you must have `Homebrew` installed
+
+## To list hidden files
 ### Before .zshrc
 To list only hidden files on a Mac, you can use the `ls` command with the `-ld` option followed by `.*`. Here's the command:
 
