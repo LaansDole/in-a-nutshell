@@ -115,8 +115,6 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 ### MY ALIASES ###
 ##################
 
-#aliases
-alias cd..="cd .."
 alias l="ls -al"
 alias lp="ls -p"
 alias h=history
@@ -125,7 +123,8 @@ alias mv='mv -iv'                           # Preferred 'mv' implementation
 alias mkdir='mkdir -pv'                     # Preferred 'mkdir' implementation
 alias ll='ls -FGlAhp'                       # Preferred 'ls' implementation
 alias less='less -FSRXc'                    # Preferred 'less' implementation
-cd() { builtin cd "$@"; ll; }               # Always list directory contents upon 'cd'
+
+#### Change Directory ####
 alias cd..='cd ../'                         # Go back 1 directory level (for fast typers)
 alias ..='cd ../'                           # Go back 1 directory level
 alias ...='cd ../../'                       # Go back 2 directory levels
@@ -133,21 +132,171 @@ alias .3='cd ../../../'                     # Go back 3 directory levels
 alias .4='cd ../../../../'                  # Go back 4 directory levels
 alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
-alias f='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
+
+alias finder='open -a Finder ./'            # finder:       Opens current directory in MacOS Finder
 alias ~="cd ~"                              # ~:            Go Home
 alias c='clear'                             # c:            Clear terminal display
 alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
 alias fix_stty='stty sane'                  # fix_stty:     Restore terminal settings when screwed up
 alias cic='set completion-ignore-case On'   # cic:          Make tab-completion case-insensitive
-mcd () { mkdir -p "$1" && cd "$1"; }        # mcd:          Makes new Dir and jumps inside
-trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the MacOS trash
-ql () { qlmanage -p "$*" >& /dev/null; }    # ql:           Opens any file in MacOS Quicklook Preview
+
 alias DT='tee ~/Desktop/terminalOut.txt'    # DT:           Pipe content to file on MacOS Desktop
 alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
+
+#### Utilities ####
 alias qfind="find . -name "                 # qfind:    Quickly search for file
-alias help-shell="awk '/^### MY ALIASES ###$/{flag=1}/^#$/{flag=0}flag' ~/.zshrc"          # help-shell: List all aliases in bash
+alias help-shell="awk '/^### MY ALIASES ###$/{flag=1}/^#$/{flag=0}flag' ~/.zshrc"    	   # help-shell: List all aliases in bash
 alias help-git="awk '/^### MY GIT ALIASES ###$/{flag=1}/^#$/{flag=0}flag' ~/.gitconfig"    # help-git: List all aliases in git 
-alias reset='source ~/.zshrc'               # reset: reset .zshrc
+alias reset='source ~/.zshrc'		    # reset: reset .zshrc
+alias vimsh='vim ~/.zshrc'		    # vimsh: modify .zshrc		
+alias seesh='cat ~/.zshrc'		    # seesh: see .zshrc
+
+########################
+### FUNCTION ALIASES ###
+########################
+
+cd() { builtin cd "$@"; ll; }               # Always list directory contents upon 'cd'
+
+#### Change name of a file ####
+change_name() {
+	if [ -e "$1" ]
+	then
+		rsync -r "$1" "$2"
+		rm -r "$1"
+	else
+		echo "$1 file or directory does not exist"
+	fi
+}
+
+#### Find a directory ####
+find_dir() {
+	echo -e "Finding the directory..."
+	path=$(sudo find / -type d -name "$1" 2>/dev/null | head -n 1)
+	if [[ -n $path ]];
+	then
+		cd "$HOME" || exit
+		cd "$path" || exit
+		echo "List all contents from $path: "
+		output=$(ls "$path")
+		if [ -z "$output" ];
+		then
+			echo -e "Directory is empty!"
+		else
+			ls -la "$path"
+		fi		
+	else
+		echo "Directory does not exist. Do you want to make this?(Y/N) "
+		read -r yes
+		if [ "$yes" == 'Y' ]
+		then
+			echo "Making directory $1"
+			mkdir -p "$1"
+		else
+			echo "Exit"
+		fi
+	fi
+}
+
+#### Move a file to directory ####
+move_file() {
+	if [ -e "$1" ]
+	then
+		if [ -d "$2" ]
+		then	
+			filename=$(basename "$1")
+			mv "$1" "$2/$filename"
+			echo "$1 moved to /$2"
+		else
+			echo "$1 file or $2 directory does not exist at $(pwd)"	
+		fi
+	else
+		echo "$1 file or $2 directory does not exist at $(pwd)"
+	fi
+}
+
+#### WTF is this ####
+wtf() {
+	set -euo pipefail
+
+	args="$@"
+	query=$(printf %s "$args" | jq -sRr @uri)
+	url="https://explainshell.com/explain?cmd=$query"
+
+	if command -v xdg-open &> /dev/null
+	then
+	    xdg-open "$url"
+	fi
+}
+
+#### Shellcheck ####
+shellcheck() {
+	for file in "$@"; do
+	    echo -e " \n-----------Checking $file-----------\n "
+	    output=$(~/shellcheck-stable/shellcheck "$file")
+
+	    if [ -z "$output" ]; then
+	        echo -e "ShellCheck found no issues in $file.\n"
+	    else
+	        echo -e "ShellCheck output for $file: $output\n"
+	    fi
+	done
+}
+
+trash () { command mv "$@" ~/.Trash ; }     	   # trash:        Moves a file to the MacOS trash
+quicklook () { qlmanage -p "$*" >& /dev/null; }    # quicklook:           Opens any file in MacOS Quicklook Preview
+
+#### Help me ####
+helpme() {
+  while true; do
+    
+    echo "What do you need help with?"
+    echo "1. shell"
+    echo "2. git"
+    echo "3. change_name"
+    echo "4. find_dir"
+    echo "5. move_file"
+    echo "6. wtf"
+    echo "7. shellcheck"
+
+    echo -e "\nEnter your choice: "
+    read choice
+
+    case $choice in
+        1)
+            help-shell
+	    break
+            ;;
+        2)
+            help-git
+	    break
+            ;;
+        3)
+            echo ">>> change_name <old_name> <new_name>: Changes the name of a file or directory from <old_name> to <new_name>."
+            break
+	    ;;
+        4)
+            echo ">>> find_dir <dir_name>: Finds a directory with the name <dir_name>. If it doesn't exist, it asks if you want to create it."
+            break
+	    ;;
+        5)
+            echo ">>> move_file <file_path> <dir_path>: Moves a file from <file_path> to directory at <dir_path>."
+            break
+	    ;;
+        6)
+            echo ">>> wtf <command>: Opens a web page explaining the given command."
+            break
+	    ;;
+        7)
+            echo ">>> shellcheck <file1> <file2> ...: Checks shell scripts for common errors and potential issues."
+            break
+	    ;;
+        *)
+            echo -e ">>> Invalid choice.\n"
+            ;;
+    esac
+  done
+}
+
 
 ######################
 ### SYSTEM ALIASES ###
@@ -157,11 +306,11 @@ alias memHogsTop='top -l 1 -o rsize | head -20'                          # memHo
 alias memHogsPs='ps wwaxm -o pid,stat,vsize,rss,time,command | head -10'
 alias cpu_hogs='ps wwaxr -o pid,stat,%cpu,time,command | head -10'       # cpu_hogs: Find CPU hogs
 alias topForever='top -l 9999999 -s 10 -o cpu'                           # topForever: Continual 'top' listing (every 10 seconds)
-alias ttop="top -R -F -s 10 -o rsize"                                    # ttop:  Recommended 'top' invocation to minimize resources
-alias mountReadWrite='/sbin/mount -uw /'                                 # mountReadWrite:   For use when booted into single-user
-alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"          # cleanupDS: Recursively delete .DS_Store file
-alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'              # finderShowHidden: Show hidden files in Finder
-alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'             # finderHideHidden: Hide hidden files in Finder
+alias ttop="top -R -F -s 10 -o rsize"					 # ttop:  Recommended 'top' invocation to minimize resources
+alias mountReadWrite='/sbin/mount -uw /'    				 # mountReadWrite:   For use when booted into single-user
+alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"		 # cleanupDS: Recursively delete .DS_Store file
+alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'		# finderShowHidden: Show hidden files in Finder
+alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'		# finderHideHidden: Hide hidden files in Finder
 alias cleanupLS="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 
 ###################
