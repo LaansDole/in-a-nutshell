@@ -1,11 +1,9 @@
-## My zsh set up on Terminal
-
-Check out [Powerlevel10k](https://github.com/romkatv/powerlevel10k#getting-started) for more information about my .zshrc file
-
-## References
-
-[.zprofile from @brandwe](https://github.com/brandwe/Zprofile)
-
 ## Personal Usage
 
-To see all aliases, run `help-shell` on terminal
+- To see all aliases, run `help-shell` on terminal
+- ****Alternatively: ****You can run `helpme` on terminal to see all the options available for aliases
+
+## Side note about shellcheck on MacOS
+#### Pre-requisites
+- .zshrc file shellcheck-stable directory must be in the same directory
+- You must allow shellcheck-stable to be run on MacOS, otherwise the system will prevent you from running it
