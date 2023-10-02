@@ -26,5 +26,6 @@ jobs:
           git add .
           git commit -m "Remove .txt from file names" && git push || echo "No changes to commit"
         env:
-          GITHUB_TOKEN: ${{ secrets.SEE_SHELL }}
+          github_token: ${{ secrets.SEE_SHELL }}
+
           
