@@ -1,0 +1,27 @@
+name: Remove .txt from file names
+
+on:
+  push:
+    branches:
+      - main  # Trigger this workflow on push to the main branch
+
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Rename .txt files
+        run: |
+          for file in $(find . -type f -name "*.txt"); do
+            mv "$file" "${file%.txt}"
+          done
+
+      - name: Push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Remove .txt from file names" && git push || echo "No changes to commit"
