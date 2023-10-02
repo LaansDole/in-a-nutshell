@@ -3,7 +3,7 @@ name: Remove .txt from file names
 on:
   push:
     branches:
-      - main  # Trigger this workflow on push to the main branch
+      - main # Trigger this workflow on push to the main branch
 
 jobs:
   rename:
@@ -19,13 +19,14 @@ jobs:
             mv "$file" "${file%.txt}"
           done
 
-      - name: Push changes
+      - name: Commit Changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
           git commit -m "Remove .txt from file names" && git push || echo "No changes to commit"
-        env:
-          github_token: ${{ secrets.SEE_SHELL }}
 
-          
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.SEE_SHELL }}
