@@ -211,7 +211,7 @@ shellcheck() {
 }
 
 trash () { command mv "$@" ~/.Trash ; }     	   # trash:        Moves a file to the MacOS trash
-quicklook () { qlmanage -p "$*" >& /dev/null; }    # quicklook:           Opens any file in MacOS Quicklook Preview
+quicklook () { qlmanage -p "$*" >& /dev/null; }    # quicklook:    Opens any file in MacOS Quicklook Preview
 
 #### Help me ####
 helpme() {
@@ -258,7 +258,6 @@ helpme() {
             ;;
     esac
   done
-
 }
 
 ######################
@@ -275,6 +274,54 @@ alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"		 # cleanupDS: R
 alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'		# finderShowHidden: Show hidden files in Finder
 alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'		# finderHideHidden: Hide hidden files in Finder
 alias cleanupLS="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+
+########################
+### UBUNTU UTILITIES ###
+########################
+
+#! >> Uncomment below for usage on Ubuntu << !#
+
+### Find a directory ###
+# #!/bin/bash
+# echo -e "Finding the directory..."
+# path=$(sudo find / -type d -name "$1" 2>/dev/null | head -n 1)
+# if [[ -n $path ]];
+# then
+# 	cd "$HOME" || exit
+# 	cd "$path" || exit
+# 	echo "List all contents from $path: "
+# 	output=$(ls "$path")
+# 	if [ -z "$output" ];
+# 	then
+# 		echo -e "Directory is empty!"
+# 	else
+# 		ls -la "$path"
+# 	fi		
+# else
+# 	echo "Directory does not exist. Do you want to make this?(Y/N) "
+# 	read -r yes
+# 	if [ "$yes" == 'Y' ]
+# 	then
+# 		echo "Making directory $1"
+# 		mkdir -p "$1"
+# 	else
+# 		echo "Exit"
+# 	fi
+# fi
+
+### WTF is this command ###
+# #!/bin/bash
+# set -euo pipefail
+
+# args="$@"
+# query=$(printf %s "$args" | jq -sRr @uri)
+# url="https://explainshell.com/explain?cmd=$query"
+
+# if command -v xdg-open &> /dev/null
+# then
+#     # linux, probably
+#     xdg-open "$url"
+# fi
 
 ###################
 ### END ALIASES ###
