@@ -1,6 +1,6 @@
 # Welcome to my in a nutsh journey
 ## Getting Started
-You just need to remove the `.txt` on all files move them to the root (`~`) of your terminal
+This repository contains my learning journey for Shell Scripting and other nerdy customizations
 
 ## Pre-requisites
 - `shellcheck-stable` directory is installed, if not, see the References below 
@@ -27,3 +27,8 @@ To list all files that start with a dot (`.`) from terminal CLI, run `ll`
 - [Must Have Git Aliases by @durdn - nicola paolucci](http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/)
 - [shellcheck](https://github.com/koalaman/shellcheck#from-your-terminal)
 - [A time-saving alias "git sweep"](https://dev.to/colinkiama/a-time-saving-git-alias-git-sweep-bhn)
+- [Read-HostWithTimeout in PowerShell](https://stackoverflow.com/questions/43733089/how-to-configure-a-timeout-for-read-host-in-powershell)
+- [ActiveDirectory Module](https://learn.microsoft.com/en-us/powershell/module/activedirectory/?view=windowsserver2022-ps)
+
+## Project
+[MinIO System Admin](https://github.com/LaansDole/unix-sysadm-minio)
