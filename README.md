@@ -7,6 +7,9 @@ This repository contains my learning journey for Shell Scripting and other nerdy
 - `.zshrc` file and `shellcheck-stable` directory must be in the same directory
 - You must allow `shellcheck-stable` to be run on MacOS, otherwise the system will prevent you from running it
 - For macOS, you must have `Homebrew` installed
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 
 ## To list hidden files
 ### Before .zshrc
@@ -30,5 +33,5 @@ To list all files that start with a dot (`.`) from terminal CLI, run `ll`
 - [Read-HostWithTimeout in PowerShell](https://stackoverflow.com/questions/43733089/how-to-configure-a-timeout-for-read-host-in-powershell)
 - [ActiveDirectory Module](https://learn.microsoft.com/en-us/powershell/module/activedirectory/?view=windowsserver2022-ps)
 
-## Project
+## UNIX/Linux Project
 [MinIO System Admin](https://github.com/LaansDole/unix-sysadm-minio)
