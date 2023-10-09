@@ -32,6 +32,7 @@ To list all files that start with a dot (`.`) from terminal CLI, run `ll`
 - [A time-saving alias "git sweep"](https://dev.to/colinkiama/a-time-saving-git-alias-git-sweep-bhn)
 - [Read-HostWithTimeout in PowerShell](https://stackoverflow.com/questions/43733089/how-to-configure-a-timeout-for-read-host-in-powershell)
 - [ActiveDirectory Module](https://learn.microsoft.com/en-us/powershell/module/activedirectory/?view=windowsserver2022-ps)
-
+- [Install WSL2](https://superuser.com/questions/1780111/cant-update-wsl-to-version-2)
+  
 ## UNIX/Linux Project
 [MinIO System Admin](https://github.com/LaansDole/unix-sysadm-minio)
