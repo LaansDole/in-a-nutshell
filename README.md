@@ -36,3 +36,4 @@ To list all files that start with a dot (`.`) from terminal CLI, run `ll`
   
 ## UNIX/Linux Project
 [MinIO System Admin](https://github.com/LaansDole/unix-sysadm-minio)
+- ***Ongoing:*** Customize wsl kali-linux distros with oh-my-zsh, turns out the setup is a lot different that it is on macOS

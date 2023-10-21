@@ -210,20 +210,31 @@ shellcheck() {
 	done
 }
 
+#### Start a python virtual environment ####
+function start_virtual_env() {
+    cd ~
+    if [[ ! -d "virtual_env" ]]; then
+        python3 -m venv virtual_env
+    fi
+    source virtual_env/bin/activate
+    cd virtual_env
+}
+
 trash () { command mv "$@" ~/.Trash ; }     	   # trash:        Moves a file to the MacOS trash
-quicklook () { qlmanage -p "$*" >& /dev/null; }    # quicklook:    Opens any file in MacOS Quicklook Preview
+quicklook () { qlmanage -p "$*" >& /dev/null; }    # quicklook:           Opens any file in MacOS Quicklook Preview
 
 #### Help me ####
 helpme() {
   while true; do
-    
+
     echo "What do you need help with?"
     echo "1. shell"
-    echo "2. git"	
+    echo "2. git"
     echo "3. touchf"
     echo "4. unfunction"
     echo "5. movfd"
     echo "6. shellcheck"
+    echo "7. start_virtual_env"
 
     echo -e "\nEnter your choice: "
     read choice
@@ -253,11 +264,16 @@ helpme() {
             echo ">>> shellcheck <file1> <file2> ...: Checks shell scripts for common errors and potential issues."
             break
 	    ;;
+        7)
+	    echo ">>> Activate and cd to python virtual_env."
+            break
+            ;;
         *)
             echo -e ">>> Invalid choice.\n"
             ;;
     esac
   done
+
 }
 
 ######################
