@@ -1,28 +1,24 @@
-# Welcome to my in a nutsh journey
+# Welcome to my in a nutsh journey on MacOS
 ## Getting Started
-This repository contains my learning journey for Shell Scripting and other nerdy customizations
-
+- This repository contains my learning journey for Shell Scripting and other nerdy customizations. 
+- Disclaimer: It is a bit tricky to setup my configuration on UNIX/Linux, I would suggest to follow the guide and only copy my aliases
 ## Pre-requisites
-- `shellcheck-stable` directory is installed, if not, see the References below 
 - `.zshrc` file and `shellcheck-stable` directory must be in the same directory
 - You must allow `shellcheck-stable` to be run on MacOS, otherwise the system will prevent you from running it
 - For macOS, you must have `Homebrew` installed
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
+- (optional) `shellcheck-stable` directory is installed, if not, see the References below 
 
-## To list hidden files
-### Before .zshrc
-To list only hidden files on a Mac, you can use the `ls` command with the `-ld` option followed by `.*`. Here's the command:
-
+## Usage
+- For best experience, ***[iTerm2](https://iterm2.com/)*** is recommended to install
+- Regarding first time setup, remember to `source ./.zshrc` to save your changes. 
+- [OPTIONAL] If your default shell is bash, do:
 ```bash
-ls -ld .*
+cd ~
+echo "exec zsh" >> .bashsrc
 ```
-
-This command will list all files in the current directory that start with a dot (`.`), which is the convention for hidden files on Unix-like systems, including macOS.
-
-### After .zshrc
-To list all files that start with a dot (`.`) from terminal CLI, run `ll`
 
 ## References
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k#getting-started)
@@ -36,4 +32,4 @@ To list all files that start with a dot (`.`) from terminal CLI, run `ll`
   
 ## UNIX/Linux Project
 [MinIO System Admin](https://github.com/LaansDole/unix-sysadm-minio)
-- ***Ongoing:*** Customize wsl kali-linux distros with oh-my-zsh, turns out the setup is a lot different that it is on macOS
+- ***Ongoing:*** [Pypoetry](https://python-poetry.org/)

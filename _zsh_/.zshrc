@@ -77,7 +77,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+        poetry
+        git
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -132,9 +135,9 @@ alias .3='cd ../../../'                     # Go back 3 directory levels
 alias .4='cd ../../../../'                  # Go back 4 directory levels
 alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
+alias ~="cd ~"                              # ~:            Go Home
 
 alias finder='open -a Finder ./'            # finder:       Opens current directory in MacOS Finder
-alias ~="cd ~"                              # ~:            Go Home
 alias c='clear'                             # c:            Clear terminal display
 alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
 alias fix_stty='stty sane'                  # fix_stty:     Restore terminal settings when screwed up
@@ -145,31 +148,31 @@ alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\
 
 #### Utilities ####
 alias qfind="find . -name "                 # qfind:    Quickly search for file
-alias help-shell="awk '/^### MY ALIASES ###$/{flag=1}/^#$/{flag=0}flag' ~/.zshrc"    	   # help-shell: List all aliases in bash
+alias help-shell="awk '/^### MY ALIASES ###$/{flag=1}/^#$/{flag=0}flag' ~/.zshrc"          # help-shell: List all aliases in bash
 alias help-git="awk '/^### MY GIT ALIASES ###$/{flag=1}/^#$/{flag=0}flag' ~/.gitconfig"    # help-git: List all aliases in git 
-alias reset='source ~/.zshrc'		    # reset: reset .zshrc
-alias vimsh='vim ~/.zshrc'		    # vimsh: modify .zshrc		
-alias seesh='cat ~/.zshrc'		    # seesh: see .zshrc
+alias reset='source ~/.zshrc'               # reset: reset .zshrc
+alias vimsh='vim ~/.zshrc'                  # vimsh: modify .zshrc
+alias seesh='cat ~/.zshrc'                  # seesh: see .zshrc
 
 ########################
 ### FUNCTION ALIASES ###
 ########################
 
-cd() { builtin cd "$@"; ll; }		# Always list directory contents upon 'cd'
+cd() { builtin cd "$@"; ll; }           # Always list directory contents upon 'cd'
 
 #### Make a file and immediately modify it ####
 touchf() {
- 	if [[ -n "$1" ]]
-	then 
-		touch "$1";
-		vim "$1";
-		if [ -z "$1" ]
-        	then 
-			chmod 700 "$1";
-		fi 
-	else
-		echo -e "Please specify a file"
-	fi 
+        if [[ -n "$1" ]]
+        then 
+                touch "$1";
+                vim "$1";
+                if [ -z "$1" ]
+                then 
+                        chmod 700 "$1";
+                fi 
+        else
+                echo -e "Please specify a file"
+        fi 
 }
 
 #### Unfunction multiple function ####
@@ -181,33 +184,33 @@ unfunction() {
 
 #### Move a file to directory ####
 movfd() {
-	if [ -e "$1" ]
-	then
-		if [ -d "$2" ]
-		then	
-			filename=$(basename "$1")
-			mv "$1" "$2/$filename"
-			echo "$1 moved to /$2"
-		else
-			echo "$1 file or $2 directory does not exist at $(pwd)"	
-		fi
-	else
-		echo "$1 file or $2 directory does not exist at $(pwd)"
-	fi
+        if [ -e "$1" ]
+        then
+                if [ -d "$2" ]
+                then
+                        filename=$(basename "$1")
+                        mv "$1" "$2/$filename"
+                        echo "$1 moved to /$2"
+                else
+                        echo "$1 file or $2 directory does not exist at $(pwd)"
+                fi
+        else
+                echo "$1 file or $2 directory does not exist at $(pwd)"
+        fi
 }
 
 #### Shellcheck ####
 shellcheck() {
-	for file in "$@"; do
-	    echo -e " \n-----------Checking $file-----------\n "
-	    output=$(~/shellcheck-stable/shellcheck "$file")
+        for file in "$@"; do
+            echo -e " \n-----------Checking $file-----------\n "
+            output=$(~/shellcheck-stable/shellcheck "$file")
 
-	    if [ -z "$output" ]; then
-	        echo -e "ShellCheck found no issues in $file.\n"
-	    else
-	        echo -e "ShellCheck output for $file: $output\n"
-	    fi
-	done
+            if [ -z "$output" ]; then
+                echo -e "ShellCheck found no issues in $file.\n"
+            else
+                echo -e "ShellCheck output for $file: $output\n"
+            fi
+        done
 }
 
 #### Start a python virtual environment ####
@@ -220,13 +223,13 @@ function start_virtual_env() {
     cd virtual_env
 }
 
-trash () { command mv "$@" ~/.Trash ; }     	   # trash:        Moves a file to the MacOS trash
+trash () { command mv "$@" ~/.Trash ; }            # trash:        Moves a file to the MacOS trash
 quicklook () { qlmanage -p "$*" >& /dev/null; }    # quicklook:           Opens any file in MacOS Quicklook Preview
 
 #### Help me ####
 helpme() {
   while true; do
-
+    
     echo "What do you need help with?"
     echo "1. shell"
     echo "2. git"
@@ -242,30 +245,30 @@ helpme() {
     case $choice in
         1)
             help-shell
-	    break
+            break
             ;;
         2)
             help-git
-	    break
+            break
             ;;
         3)
             echo ">>> touchf <file_name>: Advanced touch command, let you create a file and modify it immediately."
             break
-	    ;;
+            ;;
         4)
             echo ">>> unfunction <function1> <function2> <function3> ... : Unset multiple functions at the same time, similar to unalias command but with function"
             break
-	    ;;
+            ;;
         5)
             echo ">>> movfd <file_path> <dir_path>: Moves a file from <file_path> to directory at <dir_path>."
             break
-	    ;;
+            ;;
         6)
             echo ">>> shellcheck <file1> <file2> ...: Checks shell scripts for common errors and potential issues."
             break
-	    ;;
+            ;;
         7)
-	    echo ">>> Activate and cd to python virtual_env."
+            echo ">>> Activate and cd to python virtual_env."
             break
             ;;
         *)
@@ -284,61 +287,15 @@ alias memHogsTop='top -l 1 -o rsize | head -20'                          # memHo
 alias memHogsPs='ps wwaxm -o pid,stat,vsize,rss,time,command | head -10'
 alias cpu_hogs='ps wwaxr -o pid,stat,%cpu,time,command | head -10'       # cpu_hogs: Find CPU hogs
 alias topForever='top -l 9999999 -s 10 -o cpu'                           # topForever: Continual 'top' listing (every 10 seconds)
-alias ttop="top -R -F -s 10 -o rsize"					 # ttop:  Recommended 'top' invocation to minimize resources
-alias mountReadWrite='/sbin/mount -uw /'    				 # mountReadWrite:   For use when booted into single-user
-alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"		 # cleanupDS: Recursively delete .DS_Store file
-alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'		# finderShowHidden: Show hidden files in Finder
-alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'		# finderHideHidden: Hide hidden files in Finder
+alias ttop="top -R -F -s 10 -o rsize"                                    # ttop:  Recommended 'top' invocation to minimize resources
+alias mountReadWrite='/sbin/mount -uw /'                                 # mountReadWrite:   For use when booted into single-user
+alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"          # cleanupDS: Recursively delete .DS_Store file
+alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'              # finderShowHidden: Show hidden files in Finder
+alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'             # finderHideHidden: Hide hidden files in Finder
 alias cleanupLS="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
-
-########################
-### UBUNTU UTILITIES ###
-########################
-
-#! >> Uncomment below for usage on Ubuntu << !#
-
-### Find a directory ###
-# #!/bin/bash
-# echo -e "Finding the directory..."
-# path=$(sudo find / -type d -name "$1" 2>/dev/null | head -n 1)
-# if [[ -n $path ]];
-# then
-# 	cd "$HOME" || exit
-# 	cd "$path" || exit
-# 	echo "List all contents from $path: "
-# 	output=$(ls "$path")
-# 	if [ -z "$output" ];
-# 	then
-# 		echo -e "Directory is empty!"
-# 	else
-# 		ls -la "$path"
-# 	fi		
-# else
-# 	echo "Directory does not exist. Do you want to make this?(Y/N) "
-# 	read -r yes
-# 	if [ "$yes" == 'Y' ]
-# 	then
-# 		echo "Making directory $1"
-# 		mkdir -p "$1"
-# 	else
-# 		echo "Exit"
-# 	fi
-# fi
-
-### WTF is this command ###
-# #!/bin/bash
-# set -euo pipefail
-
-# args="$@"
-# query=$(printf %s "$args" | jq -sRr @uri)
-# url="https://explainshell.com/explain?cmd=$query"
-
-# if command -v xdg-open &> /dev/null
-# then
-#     # linux, probably
-#     xdg-open "$url"
-# fi
 
 ###################
 ### END ALIASES ###
 ###################
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
