@@ -175,13 +175,6 @@ touchf() {
         fi 
 }
 
-#### Unfunction multiple function ####
-unfunction() {
-  for func in "$@"; do
-    unset -f "$func"
-  done
-}
-
 #### Move a file to directory ####
 movfd() {
         if [ -e "$1" ]
@@ -234,7 +227,7 @@ helpme() {
     echo "1. shell"
     echo "2. git"
     echo "3. touchf"
-    echo "4. unfunction"
+    echo "4"
     echo "5. movfd"
     echo "6. shellcheck"
     echo "7. start_virtual_env"
@@ -256,7 +249,6 @@ helpme() {
             break
             ;;
         4)
-            echo ">>> unfunction <function1> <function2> <function3> ... : Unset multiple functions at the same time, similar to unalias command but with function"
             break
             ;;
         5)
