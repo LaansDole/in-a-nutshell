@@ -271,6 +271,10 @@ alias reset='source ~/.zshrc'               # reset: reset .zshrc
 alias vimsh='vim ~/.zshrc'                  # vimsh: modify .zshrc
 alias seesh='cat ~/.zshrc'                  # seesh: see .zshrc
 
+#### Virtualization ####
+alias conda-activate='conda activate env-python3.11'            # conda-activate: activate virtual environment for python3.11
+alias cd-venv='cd ~//miniconda3/envs/env-python3.11'            # cd-venv: change directory to the virtual environment
+
 # enable auto-suggestions based on the history
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
     . /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -298,3 +302,7 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+
+# Created by `pipx` on 2023-11-13 07:11:02
+export PATH="$PATH:/home/laansdole/.local/bin"
