@@ -32,4 +32,3 @@ echo "exec zsh" >> .bashsrc
   
 ## UNIX/Linux Project
 [MinIO System Admin](https://github.com/LaansDole/unix-sysadm-minio)
-- ***Ongoing:*** [Pypoetry](https://python-poetry.org/)
