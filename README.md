@@ -3,8 +3,8 @@
 - This repository contains my learning journey for Shell Scripting and other nerdy customizations. 
 - Disclaimer: It is a bit tricky to setup my configuration on UNIX/Linux, I would suggest to follow the guide and only copy my aliases
 ## Pre-requisites
-- `.zshrc` file and `shellcheck-stable` directory must be in the same directory
-- You must allow `shellcheck-stable` to be run on MacOS, otherwise the system will prevent you from running it
+- `.zshrc` file and `shellcheck-stable` directory must be in the same directory [Optional]
+- You must allow `shellcheck-stable` to be run on MacOS, otherwise the system will prevent you from running it [Optional]
 - For macOS, you must have `Homebrew` installed
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -20,7 +20,7 @@ cd ~
 echo "exec zsh" >> .bashsrc
 ```
 
-## References
+## References and Bug Fixes
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k#getting-started)
 - [.zprofile from @brandwe](https://github.com/brandwe/Zprofile)
 - [Must Have Git Aliases by @durdn - nicola paolucci](http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/)
