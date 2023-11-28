@@ -1,4 +1,4 @@
-## Pre-requisite:
+## Pre-requisite
 You should have the oh-my-zsh installed. Then, in the terminal configuration, use the Hack-Font that you have downloaded from this repo 
 
 ## Usage
