@@ -1,4 +1,4 @@
-# Welcome to my in a nutsh journey on MacOS
+# Welcome to my `in-a-nutsh` journey on MacOS and WSL kali-linux
 ## Getting Started
 - This repository contains my learning journey for Shell Scripting and other nerdy customizations. 
 - Disclaimer: It is a bit tricky to setup my configuration on UNIX/Linux, I would suggest to follow the guide and only copy my aliases
