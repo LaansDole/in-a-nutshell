@@ -30,6 +30,7 @@ echo "exec zsh" >> .bashsrc
   <li><a href="https://stackoverflow.com/questions/43733089/how-to-configure-a-timeout-for-read-host-in-powershell" target="_blank">Read-HostWithTimeout in PowerShell</a></li>
   <li><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/?view=windowsserver2022-ps" target="_blank">ActiveDirectory Module</a></li>
   <li><a href="https://superuser.com/questions/1780111/cant-update-wsl-to-version-2" target="_blank">Install WSL2</a></li>
+  <li><a href="https://www.tecmint.com/install-oh-my-zsh-in-ubuntu/" target="_blank">Install OhMyZsh in Ubuntu</a></li>
 </ul>
   
 ## UNIX/Linux Project
