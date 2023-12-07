@@ -8,11 +8,17 @@ Some people don't add aliases because they don't want to have to adjust to not h
 
 ### Prerequisite
 
-- `brew` and `git` Installation
+- `brew` (on MacOS) and `git` Installation
 - `sudo apt-get install git bash-completion` (Unix/Linux) or `brew install git bash-completion` (macOS) Installation
 - Knows how to insert and exit `vim` (You can google it)
 
 ### Getting Started
+- To first create your .gitconfig
+```
+# Configure Git user details
+git config --global user.email "dolelongan@gmail.com"
+git config --global user.name "dolelongan"
+```
 - To find your `.bash_profile`, on terminal, run:
 ```bash
 find ~ -name .bash_profile
