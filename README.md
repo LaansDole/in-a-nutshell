@@ -1,5 +1,11 @@
 # 🌰 Welcome to my `in-a-nutsh` journey 🐚
-System: ***MacOS*** and ***WSL2 Ubuntu***
+- System: ***MacOS*** and ***WSL2 Ubuntu***
+- ***Custom [.gitconfig](./_git_/.gitconfig)***
+  
+## ♾️ UNIX/Linux Project and DevOps
+- [MinIO System Admin](https://github.com/LaansDole/unix-sysadm-minio)
+- [CI/CD pipeline for RMIT Store](https://github.com/RMIT-DevOps-Hackathon/COSC2767-RMIT-Store)
+
 ## Getting Started
 - This repository contains my learning journey for Shell Scripting and other nerdy customizations. 
 - Disclaimer: It is a bit tricky to setup my configuration on UNIX/Linux, I would suggest to follow the guide and only copy my aliases
@@ -33,7 +39,3 @@ echo "exec zsh" >> .bashsrc
   <li><a href="https://superuser.com/questions/1780111/cant-update-wsl-to-version-2" target="_blank">Can't update WSL to version 2</a></li>
   <li><a href="https://www.tecmint.com/install-oh-my-zsh-in-ubuntu/" target="_blank">Install OhMyZsh in Ubuntu</a></li>
 </ul>
-  
-## ♾️ UNIX/Linux Project and DevOps
-- [MinIO System Admin](https://github.com/LaansDole/unix-sysadm-minio)
-- [CI/CD pipeline for RMIT Store](https://github.com/RMIT-DevOps-Hackathon/COSC2767-RMIT-Store)
