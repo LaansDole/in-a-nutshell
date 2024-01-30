@@ -15,8 +15,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -77,10 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-        poetry
-        git
-)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -109,23 +106,62 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+unset ZSH_AUTOSUGGEST_USE_ASYNC
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/laansdole/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/laansdole/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/laansdole/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/laansdole/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
 ##################
 ### MY ALIASES ###
 ##################
 
-alias l="ls -al"
-alias lp="ls -p"
-alias h=history
-alias cp='cp -iv'                           # Preferred 'cp' implementation
-alias mv='mv -iv'                           # Preferred 'mv' implementation
-alias mkdir='mkdir -pv'                     # Preferred 'mkdir' implementation
-alias ll='ls -FGlAhp'                       # Preferred 'ls' implementation
-alias less='less -FSRXc'                    # Preferred 'less' implementation
+# enable color support of ls, less and man, and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    export LS_COLORS="$LS_COLORS:ow=30;44:" # fix ls color for folders with 777 permissions
+
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+    alias diff='diff --color=auto'
+    alias ip='ip --color=auto'
+
+    export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
+    export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
+    export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
+    export LESS_TERMCAP_so=$'\E[01;33m'    # begin reverse video
+    export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
+    export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+    export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+
+    # Take advantage of $LS_COLORS for completion as well
+    zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+    zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+fi
+
+# some more ls aliases
+alias ll='ls -l'
+alias la='ls -A'
+alias l='ls -CF'
 
 #### Change Directory ####
 alias cd..='cd ../'                         # Go back 1 directory level (for fast typers)
@@ -135,159 +171,29 @@ alias .3='cd ../../../'                     # Go back 3 directory levels
 alias .4='cd ../../../../'                  # Go back 4 directory levels
 alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
-alias ~="cd ~"                              # ~:            Go Home
-
-alias finder='open -a Finder ./'            # finder:       Opens current directory in MacOS Finder
-alias c='clear'                             # c:            Clear terminal display
-alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
-alias fix_stty='stty sane'                  # fix_stty:     Restore terminal settings when screwed up
-alias cic='set completion-ignore-case On'   # cic:          Make tab-completion case-insensitive
-
-alias DT='tee ~/Desktop/terminalOut.txt'    # DT:           Pipe content to file on MacOS Desktop
-alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
 
 #### Utilities ####
 alias qfind="find . -name "                 # qfind:    Quickly search for file
 alias help-shell="awk '/^### MY ALIASES ###$/{flag=1}/^#$/{flag=0}flag' ~/.zshrc"          # help-shell: List all aliases in bash
-alias help-git="awk '/^### MY GIT ALIASES ###$/{flag=1}/^#$/{flag=0}flag' ~/.gitconfig"    # help-git: List all aliases in git 
+alias help-git="awk '/^### MY GIT ALIASES ###$/{flag=1}/^#$/{flag=0}flag' ~/.gitconfig"    # help-git: List all aliases in git
+alias c='clear'                             # c: clear screen
+
 alias reset='source ~/.zshrc'               # reset: reset .zshrc
 alias vimsh='vim ~/.zshrc'                  # vimsh: modify .zshrc
 alias seesh='cat ~/.zshrc'                  # seesh: see .zshrc
 
-########################
-### FUNCTION ALIASES ###
-########################
+#### Virtualization ####
+alias conda-activate='conda activate env-python3.10'            # conda-activate: activate virtual environment for python3.11
+alias cd-venv='cd ~//miniconda3/envs/env-python3.10'            # cd-venv: change directory to the virtual environment
 
-cd() { builtin cd "$@"; ll; }           # Always list directory contents upon 'cd'
+# enable auto-suggestions based on the history
+if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    . /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    # change suggestion color
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
+fi
 
-#### Make a file and immediately modify it ####
-touchf() {
-        if [[ -n "$1" ]]
-        then 
-                touch "$1";
-                vim "$1";
-                if [ -z "$1" ]
-                then 
-                        chmod 700 "$1";
-                fi 
-        else
-                echo -e "Please specify a file"
-        fi 
-}
-
-#### Move a file to directory ####
-movfd() {
-        if [ -e "$1" ]
-        then
-                if [ -d "$2" ]
-                then
-                        filename=$(basename "$1")
-                        mv "$1" "$2/$filename"
-                        echo "$1 moved to /$2"
-                else
-                        echo "$1 file or $2 directory does not exist at $(pwd)"
-                fi
-        else
-                echo "$1 file or $2 directory does not exist at $(pwd)"
-        fi
-}
-
-#### Shellcheck ####
-shellcheck() {
-        for file in "$@"; do
-            echo -e " \n-----------Checking $file-----------\n "
-            output=$(~/shellcheck-stable/shellcheck "$file")
-
-            if [ -z "$output" ]; then
-                echo -e "ShellCheck found no issues in $file.\n"
-            else
-                echo -e "ShellCheck output for $file: $output\n"
-            fi
-        done
-}
-
-#### Start a python virtual environment ####
-function start_virtual_env() {
-    cd ~
-    if [[ ! -d "virtual_env" ]]; then
-        python3 -m venv virtual_env
-    fi
-    source virtual_env/bin/activate
-    cd virtual_env
-}
-
-trash () { command mv "$@" ~/.Trash ; }            # trash:        Moves a file to the MacOS trash
-quicklook () { qlmanage -p "$*" >& /dev/null; }    # quicklook:           Opens any file in MacOS Quicklook Preview
-
-#### Help me ####
-helpme() {
-  while true; do
-    
-    echo "What do you need help with?"
-    echo "1. shell"
-    echo "2. git"
-    echo "3. touchf"
-    echo "4"
-    echo "5. movfd"
-    echo "6. shellcheck"
-    echo "7. start_virtual_env"
-
-    echo -e "\nEnter your choice: "
-    read choice
-
-    case $choice in
-        1)
-            help-shell
-            break
-            ;;
-        2)
-            help-git
-            break
-            ;;
-        3)
-            echo ">>> touchf <file_name>: Advanced touch command, let you create a file and modify it immediately."
-            break
-            ;;
-        4)
-            break
-            ;;
-        5)
-            echo ">>> movfd <file_path> <dir_path>: Moves a file from <file_path> to directory at <dir_path>."
-            break
-            ;;
-        6)
-            echo ">>> shellcheck <file1> <file2> ...: Checks shell scripts for common errors and potential issues."
-            break
-            ;;
-        7)
-            echo ">>> Activate and cd to python virtual_env."
-            break
-            ;;
-        *)
-            echo -e ">>> Invalid choice.\n"
-            ;;
-    esac
-  done
-
-}
-
-######################
-### SYSTEM ALIASES ###
-######################
-
-alias memHogsTop='top -l 1 -o rsize | head -20'                          # memHogsTop, memHogsPs: Find memory hogs
-alias memHogsPs='ps wwaxm -o pid,stat,vsize,rss,time,command | head -10'
-alias cpu_hogs='ps wwaxr -o pid,stat,%cpu,time,command | head -10'       # cpu_hogs: Find CPU hogs
-alias topForever='top -l 9999999 -s 10 -o cpu'                           # topForever: Continual 'top' listing (every 10 seconds)
-alias ttop="top -R -F -s 10 -o rsize"                                    # ttop:  Recommended 'top' invocation to minimize resources
-alias mountReadWrite='/sbin/mount -uw /'                                 # mountReadWrite:   For use when booted into single-user
-alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"          # cleanupDS: Recursively delete .DS_Store file
-alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'              # finderShowHidden: Show hidden files in Finder
-alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'             # finderHideHidden: Hide hidden files in Finder
-alias cleanupLS="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
-
-###################
-### END ALIASES ###
-###################
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# enable command-not-found if installed
+if [ -f /etc/zsh_command_not_found ]; then
+    . /etc/zsh_command_not_found
+fi
