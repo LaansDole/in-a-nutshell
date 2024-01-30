@@ -5,6 +5,7 @@
 ## ♾️ UNIX/Linux Project and DevOps
 - [MinIO System Admin](https://github.com/LaansDole/unix-sysadm-minio)
 - [CI/CD pipeline for RMIT Store](https://github.com/RMIT-DevOps-Hackathon/COSC2767-RMIT-Store)
+- [RMIT ITS Scripts](https://github.com/LaansDole/RMIT-ITS-useful-scripts)
 
 ## Getting Started
 - This repository contains my learning journey for Shell Scripting and other nerdy customizations. 
