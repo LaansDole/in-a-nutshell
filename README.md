@@ -8,8 +8,10 @@
 - [RMIT ITS Scripts](https://github.com/LaansDole/RMIT-ITS-useful-scripts)
 
 ## Getting Started
-- This repository contains my learning journey for Shell Scripting and other nerdy customizations. 
-- Disclaimer: It is a bit tricky to setup my configuration on UNIX/Linux, I would suggest to follow the guide and only copy my aliases
+This repository contains my learning journey for Shell Scripting and other nerdy customizations:
+- For [git](./_git_)
+- For [zsh](./_zsh_)
+
 ## Pre-requisites
 - For macOS, you must have `Homebrew` installed
 ```bash
@@ -21,14 +23,20 @@
 ### On Windows WSL2 Ubuntu
 - For best experience, ***[OhMyZsh](https://www.tecmint.com/install-oh-my-zsh-in-ubuntu/)*** is recommended to install
 ### First time setup
-- Regarding first time setup, remember to `source ./.zshrc` to save your changes.
+- Regarding first time setup, remember to `source ~/.zshrc` and `source ~/.bashrc` to save your changes.
 - Run this command on your terminal:
 ```bash
 cd ~
-echo "exec zsh" >> .bashsrc
+echo "
+if [ -t 1 ]
+then
+   exec zsh
+fi
+" >> .bashsrc
 ```
 
 ## References and Bug Fixes
+- See [ZSH README](./_zsh_) for a clean installation of `node` and `npm` on WSL2 Ubuntu
 <ul>
   <li><a href="https://github.com/romkatv/powerlevel10k#getting-started" target="_blank">Powerlevel10k</a></li>
   <li><a href="http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/" target="_blank">Must Have Git Aliases by @durdn - nicola paolucci</a></li>
