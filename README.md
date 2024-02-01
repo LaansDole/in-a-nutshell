@@ -36,7 +36,7 @@ fi
 ```
 
 ## References and Bug Fixes
-- See [ZSH README](./_zsh_) for a clean installation of `node` and `npm` on WSL2 Ubuntu
+- See [ZSH README](./_zsh_/README.md) for a clean installation of `node` and `npm` on WSL2 Ubuntu
 <ul>
   <li><a href="https://github.com/romkatv/powerlevel10k#getting-started" target="_blank">Powerlevel10k</a></li>
   <li><a href="http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/" target="_blank">Must Have Git Aliases by @durdn - nicola paolucci</a></li>
