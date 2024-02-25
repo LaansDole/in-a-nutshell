@@ -111,21 +111,6 @@ source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 unset ZSH_AUTOSUGGEST_USE_ASYNC
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/laansdole/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/laansdole/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/laansdole/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/laansdole/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 ##################
 ### MY ALIASES ###
 ##################
@@ -181,10 +166,6 @@ alias c='clear'                             # c: clear screen
 alias reset='source ~/.zshrc'               # reset: reset .zshrc
 alias vimsh='vim ~/.zshrc'                  # vimsh: modify .zshrc
 alias seesh='cat ~/.zshrc'                  # seesh: see .zshrc
-
-#### Virtualization ####
-alias conda-activate='conda activate env-python3.10'            # conda-activate: activate virtual environment for python3.11
-alias cd-venv='cd ~//miniconda3/envs/env-python3.10'            # cd-venv: change directory to the virtual environment
 
 # enable auto-suggestions based on the history
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
