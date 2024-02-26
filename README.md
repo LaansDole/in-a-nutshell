@@ -9,8 +9,8 @@
 
 ## Getting Started
 This repository contains my learning journey for Shell Scripting and other nerdy customizations:
-- For [git](./_git_)
-- For [zsh](./_zsh_)
+- For [git aliases](./_git_)
+- For [zsh aliases](./_zsh_)
 
 ## Pre-requisites
 - For macOS, you must have `Homebrew` installed
@@ -19,21 +19,10 @@ This repository contains my learning journey for Shell Scripting and other nerdy
 ```
 ## Usage
 ### On MacOS
-- For best experience, ***[iTerm2](https://iterm2.com/)*** is recommended to install
+For best experience, ***[iTerm2](https://iterm2.com/)*** is recommended to install
 ### On Windows WSL2 Ubuntu
-- For best experience, ***[OhMyZsh](https://www.tecmint.com/install-oh-my-zsh-in-ubuntu/)*** is recommended to install
-### First time setup
-- Regarding first time setup, remember to `source ~/.zshrc` and `source ~/.bashrc` to save your changes.
-- Run this command on your terminal:
-```bash
-cd ~
-echo "
-if [ -t 1 ]
-then
-   exec zsh
-fi
-" >> .bashsrc
-```
+For best experience, ***[OhMyZsh](https://www.tecmint.com/install-oh-my-zsh-in-ubuntu/)*** is recommended to install.
+- ***First time setup WSL2 Ubuntu, see [WSL2 setup scripts](./wsl2-script/)***
 
 ## References and Bug Fixes
 - See [ZSH README](./_zsh_/README.md) for a clean installation of `node` and `npm` on WSL2 Ubuntu
