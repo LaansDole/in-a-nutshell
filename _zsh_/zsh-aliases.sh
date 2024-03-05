@@ -146,6 +146,7 @@ fi
 # some more ls aliases
 alias ll='ls -l'
 alias la='ls -A'
+alias lla='ls -la'
 alias l='ls -CF'
 
 #### Change Directory ####
@@ -166,6 +167,7 @@ alias c='clear'                             # c: clear screen
 alias reset='source ~/.zshrc'               # reset: reset .zshrc
 alias vimsh='vim ~/.zshrc'                  # vimsh: modify .zshrc
 alias seesh='cat ~/.zshrc'                  # seesh: see .zshrc
+alias clean-zone="find . -type f -name '*Zone.Identifier' -exec rm -f {} \;"               # remove-Zone: Remove all :Zone.Indentifier files
 
 # enable auto-suggestions based on the history
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
