@@ -8,12 +8,39 @@ You should have the oh-my-zsh installed. Then, in the terminal configuration, us
 - To see all git aliases, run `help-git` on terminal
 
 ## Bug Fixes
+### On Windows
 Sometime, `npm` is linked to the NodeJS installed on your Windows, which can cause conflict in the WSL2 Ubuntu
-### Clean Installation for `node` and `npm`
+### On macOS and other UNIX system
+This is the instruction if you are running into the permission error when running `npm`, it is recommended that you re-install `node` with `nvm` first:
+1. Run the command to export the `$PATH` of `npm` to your local environment:
+```bash
+nano ~/.bash_profile
+```
+Add below lines to the `.bash_profile` file:
+```bash
+export PATH="$HOME/.npm-packages/bin:$PATH"
+``` 
+2. Save the file and re-check:
+```bash
+cat .bash_profile
+```
+3. [OPTIONAL] Add below line to both `.bash_profile` and `.bashrc` (or `.zshrc`):
+```bash
+export NVM_DIR=~/.nvm
+ [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+```
+4. Reset the local environment to update the changes:
+```bash
+source ~/.bash_profile
+source ~/.bashrc
+source ~/.zshrc
+```
+5. [OPTIONAL] Restart your machine
+## Clean Installation for `node` and `npm`
 
 This guide provides steps to uninstall Node.js and npm from your WSL Ubuntu and Windows system.
 
-- Uninstalling from WSL Ubuntu
+- ***Uninstalling from WSL Ubuntu***
 
 1. Remove the installed Node.js package:
 ```bash
@@ -43,7 +70,7 @@ This will return the path where npm is currently installed. You can then remove 
 
 Also, remember to close and reopen your terminal or run `source ~/.bashrc` to make sure your changes are being recognized.
 
-- Uninstalling from Windows System
+- ***Uninstalling from Windows System***
 
 If Node.js and npm are installed in your Windows system, you can uninstall them from the Windows "Add or Remove Programs" settings:
 
