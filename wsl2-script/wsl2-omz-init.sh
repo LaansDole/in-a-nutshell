@@ -9,7 +9,7 @@ sudo apt-get install build-essential -y
 
 # Install curl, wget, git, and zsh
 echo "Installing curl, wget, git, and zsh..."
-sudo apt install curl wget git zsh -y
+sudo apt install curl wget git zsh python3 python3-pip -y
 
 # Check zsh version
 echo "Checking zsh version..."
