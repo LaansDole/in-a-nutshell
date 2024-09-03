@@ -165,8 +165,8 @@ alias help-git="awk '/^### MY GIT ALIASES ###$/{flag=1}/^#$/{flag=0}flag' ~/.git
 alias c='clear'                             # c: clear screen
 
 alias reset='source ~/.zshrc'               # reset: reset .zshrc
-alias vimsh='vim ~/.zshrc'                  # vimsh: modify .zshrc
-alias seesh='cat ~/.zshrc'                  # seesh: see .zshrc
+alias edit='vim ~/.zshrc'                   # edit: modify .zshrc
+alias catsh='cat ~/.zshrc'                  # catsh: see .zshrc
 alias clean-zone="find . -type f -name '*Zone.Identifier' -exec rm -f {} \;"               # remove-Zone: Remove all :Zone.Indentifier files
 
 # enable auto-suggestions based on the history

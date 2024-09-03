@@ -2,18 +2,21 @@
 
 # Clone zsh-autosuggestions and zsh-syntax-highlighting into oh-my-zsh's custom plugins directory
 echo "Cloning zsh-autosuggestions and zsh-syntax-highlighting..."
-git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # Change the plugins in .zshrc file
 echo "Changing plugins in .zshrc file..."
-sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/g' ~/.zshrc
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i '' 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/g' ~/.zshrc
+else
+    sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/g' ~/.zshrc
+fi
 
-# Source .zshrc to apply changes
-echo "Sourcing .zshrc to apply changes..."
-source ~/.zshrc
+# Instruct the user to manually source .zshrc
+echo "Please run 'source ~/.zshrc' to apply the changes."
 
-# Unset ZSH_AUTOSUGGEST_USE_ASYNC
+# Unset ZSH_AUTOSUGGEST_USE_ASYNC in .zshrc
 echo "Unsetting ZSH_AUTOSUGGEST_USE_ASYNC..."
 echo "unset ZSH_AUTOSUGGEST_USE_ASYNC" >> ~/.zshrc
 

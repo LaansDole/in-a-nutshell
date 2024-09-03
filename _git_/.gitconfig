@@ -80,6 +80,7 @@
 # commit {{{
     aa = add .
     amend = commit --amend
+    amend-rb = rebase -i 
     amend-HEAD = commit -a --amend -C HEAD
     p = push
     puf = push --force-with-lease
