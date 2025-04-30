@@ -1,4 +1,5 @@
 ## Pre-requisite
+
 You should have the oh-my-zsh installed. Then, in the terminal configuration, use the Hack-Font that you have downloaded from this repo 
 ***Refer to [Powerlevel10k Documentation](https://github.com/romkatv/powerlevel10k#getting-started) for more information***
 
@@ -7,10 +8,30 @@ You should have the oh-my-zsh installed. Then, in the terminal configuration, us
 - To see all zsh aliases, run `help-shell` on terminal
 - To see all git aliases, run `help-git` on terminal
 
+## Utility Scripts
+
+This directory contains several utility scripts to help set up and manage your shell environment:
+
+### omz-init.sh
+Sets up Oh My Zsh with Powerlevel10k and necessary dependencies.
+
+```bash
+# Install Oh My Zsh and dependencies
+./omz-init.sh
+```
+
+### sync-zsh-alias.sh
+Keeps your zsh aliases in sync by copying them from `.zsh-alias.sh` to your `.zshrc` file.
+
+```bash
+# Sync your aliases
+./sync-zsh-alias.sh
+```
+
 ## Bug Fixes
-### On Windows
-Sometime, `npm` is linked to the NodeJS installed on your Windows, which can cause conflict in the WSL2 Ubuntu
+
 ### On macOS and other UNIX system
+
 This is the instruction if you are running into the permission error when running `npm`, it is recommended that you re-install `node` with `nvm` first:
 1. Run the command to export the `$PATH` of `npm` to your local environment:
 ```bash

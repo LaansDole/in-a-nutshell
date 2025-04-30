@@ -8,13 +8,10 @@ Since I often reset my WSL2, I need a way to streamline my Linux and MacOS setup
 - [CI/CD pipeline for RMIT Store](https://github.com/RMIT-DevOps-Hackathon/COSC2767-RMIT-Store)
 - [RMIT ITS Scripts](https://github.com/LaansDole/RMIT-ITS-useful-scripts)
 
-## Getting Started
-This repository nerdy customizations:
-- For [git aliases](./_git_)
-- For [zsh aliases](./_zsh_)
-
 ## Pre-requisite
+
 ### On MacOS
+
 You must have `Homebrew` installed
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -22,8 +19,15 @@ You must have `Homebrew` installed
 For best experience, ***[iTerm2](https://iterm2.com/)*** is recommended to install
 
 ### On WSL2 or Linux Distros
-For best experience, ***[OhMyZsh](https://www.tecmint.com/install-oh-my-zsh-in-ubuntu/)*** is recommended to install.
 
+For best experience, ***[OhMyZsh](./_zsh_/omz-init.sh)*** is recommended to install. 
+- Also refer to [zsh ultilities](./_zsh_)
+
+## Getting Started
+
+This repository contains my nerdy customizations:
+- For [git aliases](./_git_)
+- Zsh Aliases
 ```bash
 # enable color support of ls, less and man, and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
