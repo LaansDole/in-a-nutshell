@@ -4,31 +4,34 @@ set -euo pipefail
 ZSHRC="$HOME/.zshrc"
 ALIAS_FILE="$HOME/.zsh-alias.sh"
 
-# --- no spaces around '=' here! ---
 BEGIN_MARK="# >>> BEGIN MY ALIASES >>>"
 END_MARK="# <<< END   MY ALIASES <<<"
 
-# 1) make sure your alias file exists
+# 1) ensure alias file exists
 if [[ ! -f "$ALIAS_FILE" ]]; then
-  echo "❌  Alias file $ALIAS_FILE not found. Create it first." >&2
+  echo "Error: Alias file $ALIAS_FILE not found. Create it first." >&2
   exit 1
 fi
 
-# 2) delete any old injected block between the markers
+# 2) remove any old injected block
 if grep -Fxq "$BEGIN_MARK" "$ZSHRC"; then
   sed -i.bak "/^$(printf '%s' "$BEGIN_MARK")\$/,/^$(printf '%s' "$END_MARK")\$/d" "$ZSHRC"
 fi
 
-# 3) wipe out all remaining 'alias …' lines in ~/.zshrc
+# 3) wipe out all remaining 'alias ' lines
 sed -i "/^alias[[:space:]]/d" "$ZSHRC"
 
-# 4) append the fresh block wrapped in markers
+# 4) insert exactly one blank line before the new block if needed
+last_line="$(tail -n1 "$ZSHRC")"
+if [[ -n $last_line ]]; then
+  printf "\n" >> "$ZSHRC"
+fi
+
+# 5) append the fresh block without an extra leading newline
 {
-  echo ""
   echo "$BEGIN_MARK"
   cat "$ALIAS_FILE"
   echo "$END_MARK"
 } >> "$ZSHRC"
 
-echo "✅  Synced aliases from $ALIAS_FILE into $ZSHRC."
-source $HOME/.zshrc
+echo "Synced aliases from $ALIAS_FILE into $ZSHRC."
