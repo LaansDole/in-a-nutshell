@@ -1,7 +1,5 @@
 # 🌰 Welcome to my `in-a-nutsh` journey 🐚
-Since I often reset my WSL2, I need a way to streamline my Linux and MacOS setup.
-
-- System: ***MacOS*** and ***WSL2 Ubuntu***
+In a nutshell, I need a way to streamline my Linux and MacOS setup whenever I setup those OS.
   
 ## ♾️ UNIX/Linux and DevOps Project
 - [MinIO System Admin](https://github.com/LaansDole/unix-sysadm-minio)
@@ -27,7 +25,7 @@ For best experience, ***[OhMyZsh](./_zsh_/omz-init.sh)*** is recommended to inst
 
 This repository contains my nerdy customizations:
 - For [git aliases](./_git_)
-- Zsh Aliases
+- [zsh aliases](./_zsh_/.zsh-alias.sh)
 ```bash
 # enable color support of ls, less and man, and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -84,20 +82,54 @@ alias seesh='cat ~/.zshrc'                  # catsh: view .zshrc
 alias clean-zone="find . -type f -name '*Zone.Identifier' -exec rm -f {} \;"     # clean up Zone.Identifier files
 alias edit-alias='vim ~/.zsh-alias.sh' # Edit alias file
 
-# 1) make sure compinit has been run
+# Make sure compinit has been run
 autoload -Uz compinit
 compinit
 
-# 2) for each alias in $aliases, if there is a completion fn for the real command,
-#    bind it to the alias
-for name cmd in ${(kv)aliases}; do
-  # extract the “real” command (first word of the alias’s right-hand side)
-  cmd=${cmd%% *}
-  # if zsh knows a _cmd completion function, use it
-  if whence -w _${cmd} &>/dev/null; then
-    compdef _${cmd} $name
+# Function to set up completion for ZSH aliases
+setup_zsh_alias_completion() {
+  for name cmd in ${(kv)aliases}; do
+    # extract the "real" command (first word of the alias's right-hand side)
+    cmd=${cmd%% *}
+    # if zsh knows a _cmd completion function, use it
+    if whence -w _${cmd} &>/dev/null; then
+      compdef _${cmd} $name
+    fi
+  done
+}
+
+# Function to set up completion for git aliases
+setup_git_alias_completion() {
+  # Skip if git is not installed or no aliases are defined
+  if ! command -v git &> /dev/null || ! git config --get-regexp '^alias\.' &> /dev/null; then
+    return
   fi
-done
+
+  # Get all git aliases
+  local git_aliases=$(git config --get-regexp '^alias\.' | sed 's/^alias\.//')
+  
+  # Process each alias
+  while read -r line || [[ -n "$line" ]]; do
+    # Skip empty lines
+    [[ -z "$line" ]] && continue
+    
+    # Extract alias name and command
+    local alias=${line%% *}
+    local cmd=${line#* }
+    
+    # Skip shell commands (those starting with !)
+    if [[ "$cmd" == "!"* ]]; then
+      continue
+    fi
+    
+    # Set up git completion for this alias
+    compdef _git git-$alias
+  done <<< "$git_aliases"
+}
+
+# Run the completion setup functions
+setup_zsh_alias_completion
+setup_git_alias_completion
 ```
 
 ## References and Bug Fixes

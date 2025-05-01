@@ -1,9 +1,8 @@
 [user]
-        name = dolelongan
+        name = laansdole
         email = dolelongan@gmail.com
 [core]
         autocrlf = input
-        excludesfile = /Users/np/.gitignore_global
         pager=less -x4
 
 # include sendemail config {{{

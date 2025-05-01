@@ -5,7 +5,7 @@ ZSHRC="$HOME/.zshrc"
 ALIAS_FILE="$HOME/.zsh-alias.sh"
 
 BEGIN_MARK="# >>> BEGIN MY ALIASES >>>"
-END_MARK="# <<< END   MY ALIASES <<<"
+END_MARK=$'\n# <<< END   MY ALIASES <<<'
 
 # 1) ensure alias file exists
 if [[ ! -f "$ALIAS_FILE" ]]; then
@@ -15,7 +15,9 @@ fi
 
 # 2) remove any old injected block
 if grep -Fxq "$BEGIN_MARK" "$ZSHRC"; then
-  sed -i.bak "/^$(printf '%s' "$BEGIN_MARK")\$/,/^$(printf '%s' "$END_MARK")\$/d" "$ZSHRC"
+  # Extract just the text part of END_MARK without the newline
+  END_MARK_TEXT="# <<< END   MY ALIASES <<<"
+  sed -i.bak "/^$(printf '%s' "$BEGIN_MARK")\$/,/^$(printf '%s' "$END_MARK_TEXT")\$/d" "$ZSHRC"
 fi
 
 # 3) wipe out all remaining 'alias ' lines
@@ -35,3 +37,4 @@ fi
 } >> "$ZSHRC"
 
 echo "Synced aliases from $ALIAS_FILE into $ZSHRC."
+

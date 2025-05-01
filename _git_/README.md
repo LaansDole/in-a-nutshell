@@ -13,6 +13,6 @@ Some people don't add aliases because they don't want to have to adjust to not h
 git config --global user.email "<your_email>"
 git config --global user.name "<your_name>"
 ```
-- Otherwise, `touch ~/.gitconfig` and add the following (remember to replace with your credentials):
+- Add the following (remember to replace with your credentials):
 
 [`.gitconfig`](./.gitconfig)
