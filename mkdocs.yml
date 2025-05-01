@@ -1,0 +1,48 @@
+site_name: In A Nutshell
+site_description: A collection of scripts and configurations to streamline Linux and macOS setup
+site_author: laansdole
+repo_url: https://github.com/LaansDole/in-a-nutshell
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: indigo
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.expand
+    - navigation.indexes
+    - toc.integrate
+    - content.code.annotate
+
+nav:
+  - Home: index.md
+  - Git Config:
+      - Overview: git/index.md
+      - Aliases: git/aliases.md
+  - Zsh Setup:
+      - Overview: zsh/index.md
+      - Aliases: zsh/aliases.md
+      - Oh My Zsh: zsh/oh-my-zsh.md
+  - Scripts:
+      - Utils: scripts/utils.md
+      - Ubuntu: scripts/ubuntu.md
+  - Installation Guides:
+      - Node.js & npm: guides/node-npm.md
+  - References: references.md
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search
+  - minify:
+      minify_html: true

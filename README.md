@@ -6,6 +6,25 @@ In a nutshell, I need a way to streamline my Linux and MacOS setup whenever I se
 - [CI/CD pipeline for RMIT Store](https://github.com/RMIT-DevOps-Hackathon/COSC2767-RMIT-Store)
 - [RMIT ITS Scripts](https://github.com/LaansDole/RMIT-ITS-useful-scripts)
 
+## Documentation
+
+This project uses MkDocs for documentation. To view the documentation:
+
+1. Install MkDocs and required dependencies:
+```bash
+pip install mkdocs mkdocs-material mkdocs-minify-plugin
+```
+
+2. Serve the documentation locally:
+```bash
+mkdocs serve
+```
+
+3. Build the documentation site:
+```bash
+mkdocs build
+```
+
 ## Pre-requisite
 
 ### On MacOS
