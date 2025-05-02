@@ -12,17 +12,23 @@ This project uses MkDocs for documentation. To view the documentation:
 
 1. Install MkDocs and required dependencies:
 ```bash
+python -m venv venv
 pip install mkdocs mkdocs-material mkdocs-minify-plugin
 ```
 
 2. Serve the documentation locally:
 ```bash
-mkdocs serve
+make serve
 ```
 
 3. Build the documentation site:
 ```bash
-mkdocs build
+make build
+```
+
+4. (Optional) Deploy your project to Github Pages:
+```bash
+make deploy
 ```
 
 ## Pre-requisite
@@ -38,7 +44,6 @@ For best experience, ***[iTerm2](https://iterm2.com/)*** is recommended to insta
 ### On WSL2 or Linux Distros
 
 For best experience, ***[OhMyZsh](./_zsh_/omz-init.sh)*** is recommended to install. 
-- Also refer to [zsh ultilities](./_zsh_)
 
 ## Getting Started
 
