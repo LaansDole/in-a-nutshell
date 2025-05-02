@@ -6,6 +6,8 @@ This section covers utility scripts included in this repository.
 
 The `fzadd.sh` script provides a fuzzy finder interface for Git staging operations.
 
+[View Script Source](https://github.com/LaansDole/in-a-nutshell/blob/main/scripts/utils/fzadd.sh)
+
 ### Usage
 
 ```bash

@@ -4,11 +4,7 @@
 [core]
         autocrlf = input
         pager=less -x4
-
-# include sendemail config {{{
-[include]
-        path = ~/.git-sendemail
-# }}}
+        
 # color {{{
 [color]
         branch = auto

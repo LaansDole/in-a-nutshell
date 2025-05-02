@@ -10,6 +10,8 @@ You can install Oh My Zsh using the provided script:
 ./_zsh_/omz-init.sh
 ```
 
+[View Installation Script Source](https://github.com/LaansDole/in-a-nutshell/blob/main/_zsh_/omz-init.sh)
+
 This script will:
 
 1. Update package lists
@@ -38,6 +40,8 @@ For further customization of your Oh My Zsh setup, you can:
 1. Install additional plugins by adding them to the `plugins=()` array in your `~/.zshrc`
 2. Add custom aliases to your `~/.zsh-alias.sh` file
 3. Sync your aliases using the `sync-zsh-alias.sh` script
+
+[View Aliases Sync Script Source](https://github.com/LaansDole/in-a-nutshell/blob/main/_zsh_/sync-zsh-alias.sh)
 
 ## References
 

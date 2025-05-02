@@ -1,6 +1,7 @@
 # Git Aliases
 
 This page documents the Git aliases included in this repository's `.gitconfig` file.
+[View .gitconfig Source](https://github.com/LaansDole/in-a-nutshell/blob/main/_git_/.gitconfig)
 
 ## Basic Commands
 

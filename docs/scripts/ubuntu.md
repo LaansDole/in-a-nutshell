@@ -6,6 +6,8 @@ This section covers scripts specific to Ubuntu environments.
 
 The `docker-setup.sh` script automates the installation of Docker on Ubuntu and WSL2.
 
+[View Script Source](https://github.com/LaansDole/in-a-nutshell/blob/main/scripts/ubuntu/docker-setup.sh)
+
 ### Usage
 
 ```bash
