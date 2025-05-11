@@ -53,6 +53,9 @@ alias seesh='cat ~/.zshrc'                  # catsh: view .zshrc
 alias clean-zone="find . -type f -name '*Zone.Identifier' -exec rm -f {} \;"     # clean up Zone.Identifier files
 alias edit-alias='vim ~/.zsh-alias.sh' # Edit alias file
 
+# Optional: Reference to the original script for WSL file removal
+# alias rm ="./scripts/utils/experimental/wsl-remove.sh Permanent" # Permanent delete a file or folder
+
 # Make sure compinit has been run
 autoload -Uz compinit
 compinit

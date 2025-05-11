@@ -45,3 +45,22 @@ This page documents the ZSH aliases included in this repository.
 | `seesh` | `cat ~/.zshrc` | View .zshrc |
 | `clean-zone` | Custom find script | Clean up Zone.Identifier files |
 | `edit-alias` | `vim ~/.zsh-alias.sh` | Edit alias file |
+
+## Optional WSL Aliases
+
+These aliases are commented out by default but can be enabled by removing the comment symbol in your `.zsh-alias.sh` file:
+
+| Alias | Command | Description |
+|-------|---------|-------------|
+| `rm` | `./scripts/utils/experimental/wsl-remove.sh Permanent` | Delete files/folders permanently in WSL with Windows integration |
+
+To enable safe file deletion with Windows Recycle Bin integration, uncomment the corresponding line in your `.zsh-alias.sh` file:
+
+```bash
+# Optional: Reference to the original script for WSL file removal
+# alias rm ="./scripts/utils/experimental/wsl-remove.sh Permanent" # Permanent delete a file or folder
+```
+
+You can also modify the alias to use the "Recycle" mode instead of "Permanent" to send files to the Windows Recycle Bin instead of deleting them permanently.
+
+For more details about the WSL RemoveItem scripts, see [WSL RemoveItem Scripts](../scripts/utils.md#wsl-removeitem-scripts).
