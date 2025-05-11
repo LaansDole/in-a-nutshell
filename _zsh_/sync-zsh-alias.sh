@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eo pipefail
+# Removed the 'u' flag to prevent errors on unset variables
+
+# Ensure HOME is set
+: "${HOME:?HOME environment variable not set}"
 
 ZSHRC="$HOME/.zshrc"
 ALIAS_FILE="$HOME/.zsh-alias.sh"
 
 BEGIN_MARK="# >>> BEGIN MY ALIASES >>>"
-END_MARK=$'\n# <<< END   MY ALIASES <<<'
+END_MARK_TEXT="# <<< END   MY ALIASES <<<"
 
 # 1) ensure alias file exists
 if [[ ! -f "$ALIAS_FILE" ]]; then
@@ -13,28 +17,34 @@ if [[ ! -f "$ALIAS_FILE" ]]; then
   exit 1
 fi
 
-# 2) remove any old injected block
-if grep -Fxq "$BEGIN_MARK" "$ZSHRC"; then
-  # Extract just the text part of END_MARK without the newline
-  END_MARK_TEXT="# <<< END   MY ALIASES <<<"
-  sed -i.bak "/^$(printf '%s' "$BEGIN_MARK")\$/,/^$(printf '%s' "$END_MARK_TEXT")\$/d" "$ZSHRC"
+# 2) ensure zshrc exists
+if [[ ! -f "$ZSHRC" ]]; then
+  echo "Creating $ZSHRC file..."
+  touch "$ZSHRC" || { echo "Error: Could not create $ZSHRC"; exit 1; }
 fi
 
-# 3) wipe out all remaining 'alias ' lines
-sed -i "/^alias[[:space:]]/d" "$ZSHRC"
-
-# 4) insert exactly one blank line before the new block if needed
-last_line="$(tail -n1 "$ZSHRC")"
-if [[ -n $last_line ]]; then
-  printf "\n" >> "$ZSHRC"
+# 3) remove any old injected block
+if grep -Fxq "$BEGIN_MARK" "$ZSHRC" 2>/dev/null; then
+  sed -i.bak "/^$BEGIN_MARK$/,/^$END_MARK_TEXT$/d" "$ZSHRC"
 fi
 
-# 5) append the fresh block without an extra leading newline
+# 4) wipe out all remaining 'alias ' lines
+sed -i.bak2 "/^alias[[:space:]]/d" "$ZSHRC"
+
+# 5) insert exactly one blank line before the new block if needed
+if [[ -s "$ZSHRC" ]]; then
+  last_line="$(tail -n1 "$ZSHRC" 2>/dev/null || echo "")"
+  if [[ -n "$last_line" ]]; then
+    printf "\n" >> "$ZSHRC"
+  fi
+fi
+
+# 6) append the fresh block
 {
   echo "$BEGIN_MARK"
   cat "$ALIAS_FILE"
-  echo "$END_MARK"
+  echo "$END_MARK_TEXT"
 } >> "$ZSHRC"
 
 echo "Synced aliases from $ALIAS_FILE into $ZSHRC."
-
+echo "Run 'source ~/.zshrc' to apply changes."

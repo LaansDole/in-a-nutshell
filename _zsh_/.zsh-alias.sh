@@ -33,28 +33,31 @@ alias lla='ls -la'
 alias l='ls -CF'
 
 #### Change Directory ####
-alias cd..='cd ../'                         # Go back 1 directory level (for fast typers)
-alias ..='cd ../'                           # Go back 1 directory level
-alias ...='cd ../../'                       # Go back 2 directory levels
-alias .3='cd ../../../'                     # Go back 3 directory levels
-alias .4='cd ../../../../'                  # Go back 4 directory levels
-alias .5='cd ../../../../../'               # Go back 5 directory levels
-alias .6='cd ../../../../../../'            # Go back 6 directory levels
+alias cd..='cd ../'                        # Go back 1 directory level (for fast typers)
+alias ..='cd ../'                          # Go back 1 directory level
+alias .2='cd ../../'                       # Go back 2 directory levels
+alias .3='cd ../../../'                    # Go back 3 directory levels
+alias .4='cd ../../../../'                 # Go back 4 directory levels
+alias .5='cd ../../../../../'              # Go back 5 directory levels
+alias .6='cd ../../../../../../'           # Go back 6 directory levels
 
 #### Utilities ####
-alias qfind="find . -name "                 # qfind:    Quickly search for file
-alias help-shell="awk '/^# >>> BEGIN MY ALIASES >>>$/{flag=1}/^#$/{flag=0}flag' ~/.zshrc"          # help-shell: List all aliases in bash
-alias help-git="awk '/^### MY GIT ALIASES ###$/{flag=1}/^#$/{flag=0}flag' ~/.gitconfig"    # help-git: List all aliases in git
-alias c='clear'                             # c: clear screen
+alias qfind="find . -name "                # qfind:     Quickly search for file
+alias help-shell="awk '/^# >>> BEGIN MY ALIASES >>>$/{flag=1}/^#$/{flag=0}flag' ~/.zshrc"  # List all shell aliases
+alias help-git="awk '/^### MY GIT ALIASES ###$/{flag=1}/^#$/{flag=0}flag' ~/.gitconfig"    # List all git aliases
+alias c='clear'                            # Clear terminal screen
 
-alias reset='source ~/.zshrc'               # reset: reload .zshrc
-alias edit='vim ~/.zshrc'                   # edit: modify .zshrc
-alias seesh='cat ~/.zshrc'                  # catsh: view .zshrc
-alias clean-zone="find . -type f -name '*Zone.Identifier' -exec rm -f {} \;"     # clean up Zone.Identifier files
-alias edit-alias='vim ~/.zsh-alias.sh' # Edit alias file
+alias reset='source ~/.zshrc'              # Reload .zshrc configuration
+alias edit='vim ~/.zshrc'                  # Edit .zshrc file
+alias seesh='cat ~/.zshrc'                 # View .zshrc content
+alias clean-zone="find . -type f -name '*Zone.Identifier' -exec rm -f {} \;"  # Clean up Zone.Identifier files
+alias edit-alias='vim ~/.zsh-alias.sh'     # Edit aliases file
+
+# Replace with your own path
+alias sync-alias='./_zsh_/sync-zsh-alias.sh'  # Sync aliases to .zshrc
 
 # Optional: Reference to the original script for WSL file removal
-# alias rm ="./scripts/utils/experimental/wsl-remove.sh Permanent" # Permanent delete a file or folder
+# alias rm="./scripts/utils/experimental/wsl-remove.sh Permanent" # Permanent delete a file or folder
 
 # Make sure compinit has been run
 autoload -Uz compinit
